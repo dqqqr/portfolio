@@ -1,0 +1,1275 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Cyber security portfolio of a Cyber Security student at BINUS University — skills, tools, achievements, experience, and projects.">
+	<title>Cyber Security Portfolio — Joseph Elnathan Wibowo</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: dark;
+			--paper: #111111;
+			--panel: #1b1919;
+			--ink: #f4f1ef;
+			--muted: #aaa5a2;
+			--line: #373333;
+			--red: #ed3d42;
+			--mono: "DM Mono", monospace;
+			--sans: "DM Sans", sans-serif;
+			--serif: "Playfair Display", Georgia, serif;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+		a { color: inherit; }
+		button { font: inherit; }
+		.wrap { width: min(1180px, calc(100% - 64px)); margin-inline: auto; }
+		.eyebrow { font: 500 11px var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+
+		::selection { background: var(--red); color: var(--paper); }
+		#home { scroll-margin-top: 80px; }
+
+		.backdrop { position: fixed; z-index: -1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+		.scroll-progress { position: fixed; z-index: 20; top: 0; left: 0; width: 100%; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; }
+		.topbar { position: sticky; z-index: 10; top: 0; border-bottom: 1px solid var(--line); background: #111111d9; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+		.topbar-inner { height: 78px; display: flex; align-items: center; justify-content: space-between; }
+		.brand { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; text-decoration: none; }
+		.brand-mark { flex: none; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--red); box-shadow: 0 0 0 3px #ed3d4224; transition: transform .25s ease, box-shadow .25s ease; }
+		.brand:hover .brand-mark { transform: scale(1.08); box-shadow: 0 0 0 5px #ed3d4233; }
+		.nav { display: flex; align-items: center; gap: 26px; }
+		.nav a { text-decoration: none; color: var(--muted); font-size: 13px; transition: color .2s ease; }
+		.nav a:hover { color: var(--ink); }
+		.nav .nav-contact { padding: 11px 16px; border: 1px solid var(--ink); border-radius: 2px; color: var(--ink); }
+		.menu-toggle { display: none; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+
+		.hero-band { position: relative; overflow: hidden; }
+		.hero-band::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 56px 56px; opacity: .45; -webkit-mask-image: radial-gradient(ellipse at 72% 40%, #000, transparent 68%); mask-image: radial-gradient(ellipse at 72% 40%, #000, transparent 68%); pointer-events: none; }
+		.hero-band::after { content: ""; position: absolute; top: -180px; right: -140px; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(circle, #ed3d4238, transparent 65%); pointer-events: none; animation: glow 7s ease-in-out infinite alternate; }
+		.hero { position: relative; z-index: 1; min-height: 600px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 60px; padding-block: 76px 84px; }
+		.hero-copy { padding-block: 10px; }
+		.hero-copy > *, .terminal { animation: rise .7s ease backwards; }
+		.hero-copy > :nth-child(2) { animation-delay: .1s; }
+		.hero-copy > :nth-child(3) { animation-delay: .18s; }
+		.hero-copy > :nth-child(4) { animation-delay: .26s; }
+		.hero-copy > :nth-child(5) { animation-delay: .34s; }
+		.terminal { animation-delay: .3s; }
+		h1 { margin: 0; font-size: clamp(48px, 6vw, 76px); line-height: 1; letter-spacing: -.055em; font-weight: 500; }
+		h1 em { color: var(--red); font-family: var(--serif); font-weight: 600; letter-spacing: -.065em; }
+		.hero-name { margin: 30px 0 12px; font-size: clamp(24px, 3vw, 32px); font-weight: 600; letter-spacing: -.03em; }
+		.hero-role { display: inline-flex; align-items: center; gap: 9px; color: var(--muted); }
+		.hero-role::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px #ed3d4224; animation: beep 1.4s ease-out infinite; }
+		.hero-lede { max-width: 470px; margin: 24px 0 30px; color: var(--muted); font-size: 16px; line-height: 1.75; }
+		.hero-actions { display: flex; align-items: center; gap: 22px; }
+		.button { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 48px; padding: 0 19px; background: var(--red); color: var(--paper); text-decoration: none; font-size: 13px; transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
+		.button:hover { transform: translateY(-2px); background: #c92e34; box-shadow: 0 12px 26px -12px var(--red); }
+		.text-link { font-size: 13px; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+		.terminal { min-width: 0; border: 1px solid var(--line); background: var(--panel); box-shadow: 0 40px 90px -40px #ed3d4266; }
+		.terminal-bar { display: flex; align-items: center; gap: 7px; padding: 13px 16px; border-bottom: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); }
+		.terminal-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+		.terminal-bar i:first-child { background: var(--red); }
+		.terminal-bar span { margin-left: auto; }
+		.terminal-body { margin: 0; padding: 24px 22px 28px; overflow-x: auto; color: var(--muted); font: 13px/2 var(--mono); }
+		.terminal-body b { color: var(--red); font-weight: 500; }
+		.terminal-body .cmd, .terminal-body .cursor { color: var(--ink); }
+		.terminal-body .cmd.is-typing::after { content: "_"; }
+		.terminal-body .cursor, .terminal-body .cmd.is-typing::after { animation: blink 1s steps(1) infinite; }
+
+		.ticker { overflow: hidden; background: var(--red); color: var(--paper); border-block: 1px solid var(--red); }
+		.ticker-track { display: flex; padding-left: 32px; }
+		.ticker-track.is-running { width: max-content; padding-left: 0; animation: ticker 24s linear infinite; }
+		.ticker:hover .ticker-track { animation-play-state: paused; }
+		.ticker-group { flex: none; min-height: 58px; display: flex; align-items: center; gap: 44px; padding-right: 44px; white-space: nowrap; }
+		.ticker span { font: 11px var(--mono); text-transform: uppercase; }
+		.ticker .star { font-size: 17px; }
+
+		.section { padding-block: 100px; }
+		.section.alt { background: #1b1919b8; }
+		.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 25px; margin-bottom: 38px; }
+		.section-heading .eyebrow { color: var(--red); }
+		.section-heading h2 { margin: 11px 0 0; font-size: clamp(36px, 5vw, 58px); line-height: 1; letter-spacing: -.05em; font-weight: 500; }
+		.section-heading h2 em { font-family: var(--serif); font-weight: 600; }
+		.section-heading p { max-width: 320px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+		.skills-grid { display: grid; grid-template-columns: 1.4fr 1fr; align-items: start; gap: 56px; }
+		.skill-group { min-width: 0; }
+		.skill-group h3 { margin: 0 0 14px; font-size: 18px; letter-spacing: -.02em; font-weight: 600; }
+		.specs { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+		.spec { position: relative; display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 16px; padding: 18px 12px 18px 0; border-bottom: 1px solid var(--line); transition: padding-left .25s ease, background .25s ease; }
+		.spec::before { content: ""; position: absolute; top: -1px; bottom: -1px; left: 0; width: 2px; background: var(--red); transform: scaleY(0); transition: transform .25s ease; }
+		.spec:hover { padding-left: 14px; background: linear-gradient(90deg, #ed3d421a, transparent 70%); }
+		.spec:hover::before { transform: scaleY(1); }
+		.spec-num { color: var(--muted); font: 600 italic 22px var(--serif); transition: color .25s ease; }
+		.spec:hover .spec-num { color: var(--red); }
+		.spec h4 { margin: 0 0 4px; font-size: 16px; letter-spacing: -.02em; font-weight: 600; }
+		.spec p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+		.spec-tools { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+		.spec-tools span { padding: 5px 8px; border: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; transition: border-color .25s ease, color .25s ease; }
+		.spec:hover .spec-tools span { border-color: #ed3d4280; color: var(--ink); }
+		.lang-panel { border: 1px solid var(--line); background: var(--panel); box-shadow: 0 40px 90px -50px #ed3d4266; }
+		.lang-body { padding: 20px 22px 22px; font-family: var(--mono); }
+		.lang-cmd { margin: 0 0 14px; color: var(--ink); font-size: 13px; }
+		.lang-cmd b { color: var(--red); font-weight: 500; }
+		.langs { margin: 0; padding: 0; list-style: none; }
+		.lang { display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 14px; padding: 11px 8px; margin-inline: -8px; font-size: 13px; transition: background .2s ease; }
+		.lang:hover { background: #ed3d4214; }
+		.lang-ext { color: var(--red); font-size: 11px; }
+		.lang-name { color: var(--ink); font-family: var(--sans); font-weight: 600; }
+		.lang-level { min-width: 40px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; text-align: right; }
+		.soft { margin-top: 64px; }
+		.soft h3 { margin: 0 0 14px; font-size: 18px; letter-spacing: -.02em; font-weight: 600; }
+		.soft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0; padding: 0; list-style: none; background: var(--line); border: 1px solid var(--line); }
+		.soft-card { position: relative; display: flex; flex-direction: column; padding: 26px 24px; background: var(--paper); overflow: hidden; transition: background .25s ease; }
+		.soft-card::after { content: ""; position: absolute; right: -60px; bottom: -60px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, #ed3d4233, transparent 70%); opacity: 0; transition: opacity .3s ease; pointer-events: none; }
+		.soft-card:hover { background: var(--panel); }
+		.soft-card:hover::after { opacity: 1; }
+		.soft-card svg { width: 26px; height: 26px; fill: none; stroke: var(--red); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s ease; }
+		.soft-card:hover svg { transform: translateY(-3px) scale(1.1); }
+		.soft-card h4 { margin: 18px 0 8px; font-size: 17px; letter-spacing: -.02em; font-weight: 600; }
+		.soft-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+
+		.tools-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+		.tool { position: relative; padding: 24px 22px; background: var(--panel); transition: background .2s ease; }
+		.tool::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+		.tool:hover { background: #242121; }
+		.tool:hover::before { transform: scaleX(1); }
+		.tool .eyebrow { color: var(--red); }
+		.tool h3 { margin: 12px 0 6px; font-size: 18px; letter-spacing: -.02em; font-weight: 600; }
+		.tool p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+		.orgs { border-top: 1px solid var(--line); }
+		.org { display: grid; grid-template-columns: 1fr 1.35fr; align-items: end; gap: 48px; padding: 40px 0; border-bottom: 1px solid var(--line); }
+		.org-head { display: flex; align-items: flex-start; gap: 18px; padding-bottom: 6px; }
+		.org-mark { flex: none; width: 64px; height: 64px; padding: 2px; overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: #fff; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+		.org-mark img { display: block; width: 100%; height: 100%; object-fit: contain; transform: scale(1.12); }
+		.org:hover .org-mark { border-color: var(--red); box-shadow: 0 0 0 4px #ed3d4224, 0 12px 26px -12px var(--red); transform: translateY(-2px); }
+		.org-tag { color: var(--red); font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .09em; }
+		.org h3 { margin: 8px 0 0; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.15; letter-spacing: -.035em; font-weight: 600; }
+		.org-path { color: var(--muted); font: 11px var(--mono); }
+		.ladder { display: grid; grid-template-columns: repeat(var(--steps), 1fr); align-items: end; gap: 10px; margin: 0; padding: 0; list-style: none; }
+		.step { position: relative; height: calc(64px + var(--lvl) * 50px); display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding: 16px; border: 1px solid var(--line); border-top: 2px solid var(--muted); background: linear-gradient(180deg, #ffffff08, transparent); transform-origin: bottom; transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+		.step-tag { margin-bottom: auto; color: var(--red); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+		.step h4 { margin: 0; font-size: 15px; line-height: 1.3; letter-spacing: -.02em; font-weight: 600; }
+		.step:hover { transform: translateY(-4px); border-color: var(--red); }
+		.step.is-top { border-color: var(--red); background: linear-gradient(180deg, #ed3d4233, #ed3d420a); box-shadow: 0 22px 44px -28px var(--red); }
+		.step.is-top::after { content: "▲"; position: absolute; top: -13px; right: 14px; color: var(--red); font-size: 12px; animation: bob 1.6s ease-in-out infinite; }
+		.org-events { grid-column: 1 / -1; }
+		.events-head { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+		.events { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 0; padding: 22px 0 0; list-style: none; }
+		.events::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--red), var(--line)); }
+		.event { position: relative; display: flex; flex-direction: column; padding: 20px 18px; border: 1px solid var(--line); background: var(--panel); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+		.event::before { content: ""; position: absolute; top: -27px; left: 18px; width: 9px; height: 9px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px #ed3d4224; }
+		.event:hover { transform: translateY(-4px); border-color: var(--red); box-shadow: 0 22px 44px -28px var(--red); }
+		.event-num { color: var(--red); font: 500 22px var(--serif); font-style: italic; }
+		.event h4 { margin: 10px 0 8px; font-size: 16px; line-height: 1.25; letter-spacing: -.02em; font-weight: 600; }
+		.event p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+		.org-event { grid-column: 1 / -1; display: grid; grid-template-columns: 1.5fr 1fr; border: 1px solid var(--line); background: var(--panel); transition: border-color .25s ease; }
+		.org-event:hover { border-color: var(--red); }
+		.event-photo { position: relative; display: block; width: 100%; padding: 0; border: 0; background: none; overflow: hidden; aspect-ratio: 16 / 10; cursor: zoom-in; }
+		.event-photo:focus-visible, .event-open:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+		.event-photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.85); transition: transform .6s ease, filter .6s ease; }
+		.event-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 60%, #1b1919cc); pointer-events: none; }
+		.org-event:hover .event-photo img { transform: scale(1.04); filter: saturate(1); }
+		.event-badge { position: absolute; z-index: 1; top: 16px; left: 16px; padding: 7px 10px; background: var(--red); color: var(--paper); font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .09em; }
+		.event-info { display: flex; flex-direction: column; justify-content: center; padding: 34px; }
+		.event-info h4 { margin: 10px 0 12px; font-size: clamp(26px, 3vw, 34px); letter-spacing: -.04em; font-weight: 600; }
+		.event-info p { margin: 0 0 22px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+		.event-open { align-self: flex-start; padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; color: var(--ink); font-size: 13px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+		.org.is-visible .step { animation: grow .7s cubic-bezier(.2, .8, .2, 1) backwards; animation-delay: calc(150ms + var(--lvl) * 140ms); }
+
+		.achievements-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+		.achievement { min-width: 0; display: flex; flex-direction: column; padding: 30px; border: 1px solid var(--line); background: var(--panel); transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+		.achievement:hover { border-color: var(--red); transform: translateY(-3px); box-shadow: 0 22px 44px -26px var(--red); }
+		.achievement-top { display: flex; justify-content: space-between; gap: 15px; color: var(--muted); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+		.achievement-top span:first-child { color: var(--red); }
+		.achievement h3 { margin: 26px 0 6px; font-size: 22px; letter-spacing: -.03em; font-weight: 600; }
+		.achievement-issuer { color: var(--red); font: 11px var(--mono); }
+		.achievement p { margin: 14px 0 26px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+		.cert-button { align-self: flex-start; display: inline-flex; align-items: center; gap: 14px; min-height: 42px; margin-top: auto; padding: 0 16px; border: 1px solid var(--ink); border-radius: 2px; color: var(--ink); text-decoration: none; font-size: 13px; transition: background .2s ease, border-color .2s ease, color .2s ease; }
+		.cert-button:hover { background: var(--red); border-color: var(--red); color: var(--paper); }
+
+		.achievements-grid:has(.achievement-feature) { grid-template-columns: 1fr; }
+		.achievement-feature { position: relative; overflow: hidden; display: grid; grid-template-columns: 300px 1fr; gap: 0; padding: 0; }
+		.achievement-feature::after { content: ""; position: absolute; top: 0; bottom: 0; left: -40%; width: 30%; background: linear-gradient(90deg, transparent, #ed3d4214, transparent); transform: skewX(-18deg); pointer-events: none; animation: sweep 5s ease-in-out infinite; }
+		.achievement-emblem { position: relative; display: grid; place-items: center; min-height: 300px; border-right: 1px solid var(--line); background: radial-gradient(circle at 50% 50%, #ed3d4233, transparent 62%), repeating-linear-gradient(0deg, transparent 0 27px, #37333366 27px 28px); }
+		.emblem-ring { position: absolute; width: 210px; height: 210px; animation: spin 24s linear infinite; }
+		.emblem-ring circle { fill: none; stroke: var(--red); stroke-width: 1; }
+		.emblem-ring circle:first-child { stroke-dasharray: 3 9; opacity: .8; }
+		.emblem-ring circle:last-child { stroke-dasharray: 60 30 8 30; opacity: .45; }
+		.emblem-core { position: relative; width: 132px; height: 132px; display: grid; place-content: center; justify-items: center; gap: 8px; border-radius: 50%; background: var(--paper); border: 1px solid var(--red); box-shadow: 0 0 0 8px #ed3d4214, 0 0 50px -6px #ed3d4299; color: var(--red); transition: transform .4s ease; }
+		.emblem-core svg { width: 46px; height: 46px; }
+		.emblem-core span { color: var(--ink); font: 500 10px var(--mono); text-transform: uppercase; letter-spacing: .2em; }
+		.achievement-feature:hover .emblem-core { transform: scale(1.06) rotate(-4deg); }
+		.achievement-body { min-width: 0; display: flex; flex-direction: column; padding: 34px 38px; }
+		.achievement-feature h3 { margin-top: 22px; font-size: clamp(26px, 3vw, 36px); line-height: 1.1; }
+		.achievement-feature h3 em { color: var(--red); font-family: var(--serif); font-weight: 600; }
+		.achievement-feature p { max-width: 560px; margin-bottom: 20px; }
+		.achievement-facts { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 0 26px; border: 1px solid var(--line); }
+		.achievement-facts div { padding: 14px 16px; border-left: 1px solid var(--line); }
+		.achievement-facts div:first-child { border-left: 0; }
+		.achievement-facts dt { color: var(--muted); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+		.achievement-facts dd { margin: 6px 0 0; color: var(--ink); font-size: 14px; font-weight: 600; }
+		.achievement-facts div:last-child dd { color: var(--red); }
+
+		.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+		.project { min-width: 0; display: flex; flex-direction: column; padding: 30px; border: 1px solid var(--line); background: var(--panel); transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+		.project:hover { border-color: var(--red); transform: translateY(-3px); box-shadow: 0 22px 44px -26px var(--red); }
+		.project-top { display: flex; justify-content: space-between; gap: 15px; color: var(--muted); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+		.project-top span:first-child { color: var(--red); }
+		.project h3 { margin: 26px 0 10px; font-size: 24px; letter-spacing: -.03em; font-weight: 600; }
+		.project p { margin: 0 0 26px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+		.project-feature { grid-column: 1 / -1; display: grid; grid-template-columns: 1.05fr 1fr; gap: 0; padding: 0; overflow: hidden; }
+		.feature-copy { display: flex; flex-direction: column; padding: 34px; }
+		.project-feature h3 { font-size: clamp(28px, 3.2vw, 38px); line-height: 1.1; }
+		.project-feature h3 em { color: var(--red); font-family: var(--serif); font-weight: 600; }
+		.project-feature p { margin-bottom: 22px; }
+		.ledger { margin: 0 0 26px; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+		.ledger li { display: grid; grid-template-columns: 78px 1fr; align-items: baseline; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 13px; transition: padding-left .2s ease; }
+		.ledger li:hover { padding-left: 6px; }
+		.ledger span { color: var(--red); font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+		.feature-preview { --leaf: #1f8a5b; position: relative; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 40px 36px; border-left: 1px solid var(--line); background: radial-gradient(circle at 80% 15%, #1f8a5b55, transparent 55%), linear-gradient(160deg, #10372a, #0d1f19 70%); }
+		.feature-preview::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(#ffffff14 1px, transparent 1px); background-size: 18px 18px; pointer-events: none; }
+		.project-feature.is-flipped { grid-template-columns: 1fr 1.05fr; }
+		.project-feature.is-flipped .feature-preview { border-left: 0; border-right: 1px solid var(--line); }
+		.shot-preview { width: 100%; margin: 0; border-top: 0; border-bottom: 0; border-left: 0; color: inherit; font: inherit; text-align: left; cursor: zoom-in; align-items: center; gap: 22px; }
+		.bk-preview { background: radial-gradient(circle at 50% 0%, #ed3d4240, transparent 60%), #0b0b0d; }
+		.bk-preview::before { background-image: radial-gradient(#ffffff10 1px, transparent 1px); }
+		.shot-preview:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+		.bk-brand { position: relative; display: flex; align-items: center; gap: 10px; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: -.01em; }
+		.bk-brand { gap: 12px; font-size: 15px; }
+		.bk-brand img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px #ed3d4233, 0 10px 24px -8px #ed3d4299; }
+		.shot-stack { position: relative; width: 100%; aspect-ratio: 1600 / 951; margin-top: 10px; }
+		.bk-stack { aspect-ratio: 1600 / 763; }
+		.shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top; border: 1px solid #2a2a2e; border-radius: 10px; box-shadow: 0 30px 60px -30px #000; transition: transform .45s ease, box-shadow .45s ease; }
+		.shot.is-back-1 { transform: translate(14px, -12px) scale(.95); opacity: .7; }
+		.shot.is-back-2 { transform: translate(28px, -24px) scale(.9); opacity: .4; }
+		.shot-preview:hover .shot:last-child { transform: translateY(-6px); box-shadow: 0 36px 60px -30px #ed3d4299; }
+		.shot-preview:hover .shot.is-back-1 { transform: translate(30px, -22px) scale(.95) rotate(1.5deg); }
+		.shot-preview:hover .shot.is-back-2 { transform: translate(56px, -40px) scale(.9) rotate(3deg); }
+		.bk-hint { position: relative; padding: 8px 14px; border: 1px solid #ffffff2e; border-radius: 999px; background: #0b0b0dcc; color: #fff; font: 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; transition: background .25s ease, border-color .25s ease; }
+		.shot-preview:hover .bk-hint { background: var(--red); border-color: var(--red); }
+		.bk-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+		.bk-actions .cert-button { margin-top: 0; background: transparent; cursor: pointer; }
+		.gallery { width: min(1180px, calc(100% - 32px)); max-height: calc(100% - 32px); padding: 0; border: 1px solid var(--line); background: var(--panel); color: var(--ink); overflow: auto; }
+		.gallery::backdrop { background: #000000cc; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+		.gallery[open] { animation: rise .35s ease; }
+		.gallery-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+		.gallery-head strong { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+		.gallery-head strong img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+		.diet-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, #0f3d2c, #1f8a5b); color: #fff; font: 600 16px var(--serif); }
+		.diet-preview .bk-hint { background: #0d1f19cc; }
+		.gallery-close { width: 36px; height: 36px; border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 18px; cursor: pointer; transition: border-color .2s ease, color .2s ease; }
+		.gallery-close:hover { border-color: var(--red); color: var(--red); }
+		.gallery-tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 20px 0; }
+		.gallery-tab { padding: 8px 14px; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 11px var(--mono); text-transform: uppercase; letter-spacing: .07em; cursor: pointer; transition: all .2s ease; }
+		.gallery-tab:hover { color: var(--ink); }
+		.gallery-tab[aria-selected="true"] { border-color: var(--red); background: var(--red); color: var(--paper); }
+		.gallery-stage { position: relative; padding: 16px 20px 8px; }
+		.gallery-stage img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; background: #0b0b0d; }
+		.gallery-stage img.is-swapping { animation: rise .35s ease; }
+		.gallery-nav { position: absolute; top: 50%; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; background: #111111e6; color: var(--ink); font-size: 18px; cursor: pointer; transform: translateY(-50%); transition: border-color .2s ease, background .2s ease; }
+		.gallery-nav:hover { border-color: var(--red); background: var(--red); }
+		.gallery-nav.is-prev { left: 30px; }
+		.gallery-nav.is-next { right: 30px; }
+		.gallery.is-single .gallery-tabs { display: none; }
+		.gallery.is-single .gallery-stage img { width: auto; max-width: 100%; max-height: calc(100vh - 190px); margin-inline: auto; object-fit: contain; }
+		.gallery-caption { margin: 0; padding: 4px 20px 20px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+		.diet-services { position: relative; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+		.diet-services li { display: inline-flex; align-items: center; gap: 7px; padding: 6px 10px; border: 1px solid #ffffff2e; background: #0d1f19cc; color: #d6efe2; font: 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+		.diet-services li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3dbb6a; box-shadow: 0 0 0 3px #3dbb6a33; }
+		.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+		.tag { padding: 6px 9px; border: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+
+		.contact { padding-block: 110px 100px; }
+		.contact-panel { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: center; gap: 56px; padding: 68px; background: var(--panel); color: var(--ink); }
+		.contact-panel h2 { position: relative; z-index: 1; max-width: 680px; margin: 18px 0 25px; font-size: clamp(42px, 6vw, 72px); line-height: 1.02; letter-spacing: -.055em; font-weight: 500; }
+		.contact-panel h2 em { font-family: var(--serif); }
+		.contact-panel .eyebrow { position: relative; z-index: 1; color: var(--red); }
+		.contact-panel .button { position: relative; z-index: 1; background: var(--red); color: var(--paper); }
+		.contact-panel .button:hover { background: #c92e34; }
+		.contact-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 14px; }
+		.contact-actions .button { gap: 10px; }
+		.button-icon { flex: none; width: 16px; height: 16px; fill: currentColor; }
+		.contact-panel .button-outline { border: 1px solid var(--ink); background: transparent; color: var(--ink); transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease; }
+		.contact-panel .button-outline:hover { border-color: var(--red); background: var(--red); color: var(--paper); }
+
+		.attack-map { --level-0: #322e2e; --level-1: #8a2a2e; --level-2: #b93338; --level-3: #ed3d42; --level-4: #ff9da0; min-width: 0; margin: 0; }
+		.attack-map figcaption strong { display: block; font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+		.attack-map figcaption span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+		.map-frame { position: relative; margin-top: 16px; }
+		.map-svg { display: block; width: 100%; height: auto; }
+		.map-svg path { fill: var(--level-0); stroke: var(--panel); stroke-width: .6; stroke-linejoin: round; transition: fill .6s ease; }
+		.map-svg .marker { stroke: var(--panel); stroke-width: 2; transition: fill .6s ease, opacity .6s ease; }
+		.map-svg .hit { fill: transparent; }
+		.map-svg .level-1 { fill: var(--level-1); }
+		.map-svg .level-2 { fill: var(--level-2); }
+		.map-svg .level-3 { fill: var(--level-3); }
+		.map-svg .level-4 { fill: var(--level-4); }
+		.map-svg .is-pending { fill: var(--level-0); }
+		.map-svg .marker.is-pending { opacity: 0; }
+		.map-svg .pulse { fill: none; stroke: var(--ink); stroke-width: 1.2; vector-effect: non-scaling-stroke; opacity: 0; pointer-events: none; transform-box: fill-box; transform-origin: center; }
+		.map-svg.is-live .pulse { animation: pulse 2.8s ease-out infinite; animation-delay: var(--pulse-delay, 0s); }
+		.map-svg [tabindex] { outline: none; cursor: pointer; }
+		.map-svg path[tabindex]:hover, .map-svg path[tabindex]:focus-visible, .map-svg path.is-spotlight, .map-svg g[tabindex]:hover .marker, .map-svg g[tabindex]:focus-visible .marker, .map-svg g.is-spotlight .marker { stroke: var(--ink); stroke-width: 1.4; }
+		.map-tooltip { position: absolute; z-index: 2; padding: 8px 11px; border: 1px solid var(--line); background: var(--paper); white-space: nowrap; pointer-events: none; transform: translate(-50%, calc(-100% - 12px)); }
+		.map-tooltip.is-below { transform: translate(-50%, 14px); }
+		.map-tooltip.is-auto { transition: left .45s ease, top .45s ease; }
+		.map-tooltip strong { display: block; font-size: 16px; font-weight: 600; }
+		.map-tooltip span { color: var(--muted); font-size: 11px; }
+		.map-status { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: var(--muted); font: 11px var(--mono); text-align: center; }
+		.map-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 14px 0 0; padding: 0; list-style: none; color: var(--muted); font: 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+		.map-legend li { display: inline-flex; align-items: center; gap: 7px; }
+		.map-legend i { width: 12px; height: 12px; border-radius: 2px; }
+		.map-legend .level-0 { background: var(--level-0); }
+		.map-legend .level-1 { background: var(--level-1); }
+		.map-legend .level-2 { background: var(--level-2); }
+		.map-legend .level-3 { background: var(--level-3); }
+		.map-legend .level-4 { background: var(--level-4); }
+		.map-data { margin-top: 14px; font-size: 12px; }
+		.map-data summary { width: fit-content; cursor: pointer; font: 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+		.map-data table { width: 100%; margin-top: 8px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+		.map-data th, .map-data td { padding: 7px 0; border-bottom: 1px solid var(--line); text-align: left; }
+		.map-data th { color: var(--muted); font-weight: 500; }
+		.map-data th:last-child, .map-data td:last-child { text-align: right; }
+		.map-source { margin: 14px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+
+		footer { border-top: 1px solid var(--line); }
+		.footer-inner { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--muted); font: 10px var(--mono); }
+		.socials { display: flex; gap: 22px; }
+		.socials a { color: var(--ink); text-decoration: none; }
+		.socials a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+		.reveal { opacity: 0; }
+		.reveal.is-visible { opacity: 1; animation: rise .6s ease backwards; animation-delay: var(--reveal-delay, 0ms); }
+
+		@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+		@keyframes blink { 50% { opacity: 0; } }
+		@keyframes pulse { from { opacity: .85; transform: scale(.15); } to { opacity: 0; transform: scale(1); } }
+		@keyframes beep {
+			0% { opacity: 1; box-shadow: 0 0 0 0 #ed3d42b3; }
+			50% { opacity: .35; }
+			100% { opacity: 1; box-shadow: 0 0 0 10px #ed3d4200; }
+		}
+		@keyframes glow { to { opacity: .55; transform: scale(1.12); } }
+		@keyframes grow { from { opacity: 0; transform: scaleY(.2); } }
+		@keyframes grow-x { from { opacity: 0; transform: translateX(-24px); } }
+		@keyframes bob { 50% { transform: translateY(-4px); } }
+		@keyframes spin { to { transform: rotate(360deg); } }
+		@keyframes sweep { 0%, 55% { left: -40%; } 100% { left: 120%; } }
+		@keyframes ticker { to { transform: translateX(var(--ticker-shift, -50%)); } }
+
+		@media (min-width: 1400px) { .wrap { width: min(1240px, calc(100% - 96px)); } }
+		@media (max-width: 980px) {
+			.skills-grid { grid-template-columns: 1fr; gap: 44px; }
+			.tools-grid { grid-template-columns: 1fr 1fr; }
+			.achievements-grid { grid-template-columns: 1fr 1fr; }
+			.events { grid-template-columns: repeat(3, 1fr); }
+			.soft-grid { grid-template-columns: 1fr 1fr; }
+			.events::before, .event::before { display: none; }
+			.events { padding-top: 0; }
+			.contact-panel { grid-template-columns: 1fr; gap: 44px; }
+		}
+		@media (max-width: 760px) {
+			.wrap { width: calc(100% - 40px); }
+			.topbar-inner { height: 68px; }
+			.menu-toggle { display: inline-grid; place-items: center; width: 42px; height: 42px; }
+			.menu-toggle svg { width: 22px; height: 22px; }
+			.nav { position: absolute; z-index: 5; top: 68px; right: 20px; left: 20px; display: none; align-items: stretch; gap: 0; padding: 8px 18px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 12px 25px #0008; }
+			.nav.is-open { display: flex; flex-direction: column; }
+			.nav a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+			.nav a:last-child { border: 0; }
+			.nav .nav-contact { border: 0; }
+			.hero { min-height: 0; grid-template-columns: 1fr; gap: 36px; padding-block: 60px 55px; }
+			h1 { font-size: clamp(42px, 12vw, 72px); }
+			.hero-lede { font-size: 15px; }
+			.terminal-body { padding: 20px 18px 24px; font-size: 12px; }
+			.ticker-group { min-height: 52px; gap: 30px; padding-right: 30px; }
+			.section { padding-block: 72px; }
+			.section-heading { display: block; margin-bottom: 28px; }
+			.section-heading p { margin-top: 15px; }
+			.skills-grid { grid-template-columns: 1fr; gap: 34px; }
+			.spec { grid-template-columns: 36px 1fr; gap: 10px 12px; }
+			.spec-tools { grid-column: 2; justify-content: flex-start; }
+			.soft { margin-top: 48px; }
+			.soft-grid { grid-template-columns: 1fr; }
+			.org { grid-template-columns: 1fr; gap: 28px; padding: 32px 0; }
+			.ladder { grid-template-columns: 1fr; gap: 8px; }
+			.step { height: auto; width: calc(100% - (var(--steps) - var(--lvl)) * 16%); }
+			.org.is-visible .step { animation-name: grow-x; }
+			.org-event { grid-template-columns: 1fr; }
+			.project-feature { grid-template-columns: 1fr; padding: 0; }
+			.feature-copy { padding: 24px; }
+			.feature-preview { order: -1; padding: 28px 20px; border-left: 0; border-bottom: 1px solid var(--line); }
+			.project-feature.is-flipped { grid-template-columns: 1fr; }
+			.project-feature.is-flipped .feature-preview { border-right: 0; }
+			.events { grid-template-columns: 1fr; }
+			.events-head { flex-direction: column; gap: 6px; }
+			.event-photo::after { background: linear-gradient(180deg, transparent 65%, #1b1919cc); }
+			.event-info { padding: 24px 22px; }
+			.achievements-grid, .projects-grid { grid-template-columns: 1fr; gap: 20px; }
+			.achievement, .project { padding: 24px; }
+			.achievement-feature { grid-template-columns: 1fr; padding: 0; }
+			.achievement-emblem { min-height: 230px; border-right: 0; border-bottom: 1px solid var(--line); }
+			.emblem-ring { width: 180px; height: 180px; }
+			.emblem-core { width: 112px; height: 112px; }
+			.achievement-body { padding: 26px 22px; }
+			.contact { padding-block: 76px; }
+			.contact-panel { gap: 36px; padding: 42px 26px; }
+			.contact-panel h2 { max-width: 500px; }
+			.footer-inner { min-height: 90px; flex-wrap: wrap; justify-content: space-between; padding-block: 20px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; }
+		}
+	</style>
+</head>
+<body>
+	<canvas class="backdrop" aria-hidden="true"></canvas>
+	<div class="scroll-progress" aria-hidden="true"></div>
+	<header class="topbar">
+		<div class="wrap topbar-inner">
+			<a class="brand" href="#home" aria-label="Joseph Elnathan Wibowo, home"><img class="brand-mark" src="images/profile.jpg" alt="" width="40" height="40"><span>Joseph Elnathan Wibowo</span></a>
+			<button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+			</button>
+			<nav class="nav" id="site-nav" aria-label="Main navigation">
+				<a href="#skills">Skills</a><a href="#tools">Tools</a><a href="#achievements">Achievements</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#contact" class="nav-contact">Contact <span aria-hidden="true">↗</span></a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="home">
+		<!-- Title, name, and role -->
+		<div class="hero-band">
+			<section class="wrap hero" aria-labelledby="hero-title">
+				<div class="hero-copy">
+					<h1 id="hero-title">Cyber Security <em>Portfolio.</em></h1>
+					<p class="hero-name">Joseph Elnathan Wibowo
+					</p>
+					<div class="eyebrow hero-role">Cyber Security Student @ BINUS University</div>
+					<p class="hero-lede">Learning how systems break so I can help build ones that don’t.</p>
+					<div class="hero-actions"><a class="button" href="#projects">View my projects <span aria-hidden="true">↓</span></a><a class="text-link" href="#contact">Get in touch</a></div>
+				</div>
+				<div class="terminal" aria-hidden="true">
+					<div class="terminal-bar"><i></i><i></i><i></i><span>~/portfolio</span></div>
+<pre class="terminal-body"><b>$</b> <span class="cmd">whoami</span>
+Joseph Elnathan Wibowo
+<b>$</b> <span class="cmd">cat role.txt</span>
+Cyber Security Student @ BINUS University
+<b>$</b> <span class="cmd">ls focus/</span>
+web-security   network-defense
+secure-coding  ctf
+mobile-security  malware-analysis
+<b>$</b> <span class="cursor">_</span></pre>
+				</div>
+			</section>
+		</div>
+
+		<div class="ticker" aria-label="Web security, network defense, secure coding, and capture the flag">
+			<div class="ticker-track">
+				<div class="ticker-group"><span>Web security</span><span class="star" aria-hidden="true">✳</span><span>Network defense</span><span class="star" aria-hidden="true">✳</span><span>Secure coding</span><span class="star" aria-hidden="true">✳</span><span>Capture the flag</span><span class="star" aria-hidden="true">✳</span></div>
+			</div>
+		</div>
+
+		<!-- Skills -->
+		<section class="section" id="skills" aria-labelledby="skills-title">
+			<div class="wrap">
+				<div class="section-heading">
+					<div><div class="eyebrow">01 / Skills</div><h2 id="skills-title">What I <em>know.</em></h2></div>
+					<p>The areas I’m building depth in through coursework, labs, and practice.</p>
+				</div>
+				<div class="skills-grid">
+					<div class="skill-group">
+						<h3>Specialties</h3>
+						<ol class="specs">
+							<li class="spec"><span class="spec-num">01</span><div><h4>Web application security</h4><p>Finding and testing flaws in web apps.</p></div><div class="spec-tools"><span>Burp Suite</span><span>SQLMap</span></div></li>
+							<li class="spec"><span class="spec-num">02</span><div><h4>Network security</h4><p>Mapping hosts and reading the traffic between them.</p></div><div class="spec-tools"><span>Nmap</span><span>Wireshark</span></div></li>
+							<li class="spec"><span class="spec-num">03</span><div><h4>Secure programming</h4><p>Writing code that handles input and credentials safely.</p></div><div class="spec-tools"><span>PHP</span><span>Python</span></div></li>
+							<li class="spec"><span class="spec-num">04</span><div><h4>Vulnerability assessment</h4><p>Validating weaknesses in lab targets.</p></div><div class="spec-tools"><span>Metasploit</span><span>Nmap</span></div></li>
+							<li class="spec"><span class="spec-num">05</span><div><h4>Digital forensics</h4><p>Recovering and analysing evidence from disks and captures.</p></div><div class="spec-tools"><span>Autopsy</span><span>Wireshark</span></div></li>
+						</ol>
+					</div>
+					<div class="skill-group">
+						<h3>Programming</h3>
+						<div class="lang-panel">
+							<div class="terminal-bar"><i></i><i></i><i></i><span>~/languages</span></div>
+							<div class="lang-body">
+								<p class="lang-cmd"><b>$</b> ls --level</p>
+								<ul class="langs">
+									<li class="lang"><span class="lang-ext">.py</span><span class="lang-name">Python</span><span class="lang-level">Entry</span></li>
+									<li class="lang"><span class="lang-ext">.java</span><span class="lang-name">Java</span><span class="lang-level">Entry</span></li>
+									<li class="lang"><span class="lang-ext">.php</span><span class="lang-name">PHP</span><span class="lang-level">Entry</span></li>
+									<li class="lang"><span class="lang-ext">.cpp</span><span class="lang-name">C++</span><span class="lang-level">Entry</span></li>
+									<li class="lang"><span class="lang-ext">.sql</span><span class="lang-name">SQL</span><span class="lang-level">Entry</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="soft">
+					<h3>Soft skills</h3>
+					<ul class="soft-grid">
+						<li class="soft-card">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5z"/></svg>
+							<h4>Communication</h4>
+							<p>Turning ideas into posts, captions, and visuals people actually read.</p>
+						</li>
+						<li class="soft-card">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9L9.5 8z"/></svg>
+							<h4>Leadership</h4>
+							<p>Grew from member to activist to board member, and took on more each step.</p>
+						</li>
+						<li class="soft-card">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3.3 2.7-5 6-5s6 1.7 6 5M10 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/></svg>
+							<h4>Teamwork</h4>
+							<p>Working in committees and dev teams where every part has to fit.</p>
+						</li>
+						<li class="soft-card">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+							<h4>Event organising</h4>
+							<p>Six events on committee, from freshman expos to Christmas and anniversaries.</p>
+						</li>
+						<li class="soft-card">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>
+							<h4>Problem solving under pressure</h4>
+							<p>Working through unfamiliar challenges against the clock.</p>
+						</li>
+						<li class="soft-card">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>
+							<h4>Fast learner</h4>
+							<p>Picking up new tools and languages as each project needs them.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- Tools for cyber security -->
+		<section class="section alt" id="tools" aria-labelledby="tools-title">
+			<div class="wrap">
+				<div class="section-heading">
+					<div><div class="eyebrow">02 / Tools</div><h2 id="tools-title">Tools for cyber <em>security.</em></h2></div>
+					<p>The toolkit I reach for when scanning, testing, and analysing.</p>
+				</div>
+				<div class="tools-grid">
+					<div class="tool"><div class="eyebrow">Platform</div><h3>Kali Linux</h3><p>Primary environment for security testing.</p></div>
+					<div class="tool"><div class="eyebrow">Recon</div><h3>Nmap</h3><p>Host discovery and port scanning.</p></div>
+					<div class="tool"><div class="eyebrow">Network</div><h3>Wireshark</h3><p>Packet capture and traffic analysis.</p></div>
+					<div class="tool"><div class="eyebrow">Web</div><h3>Burp Suite</h3><p>Intercepting and testing web requests.</p></div>
+					<div class="tool"><div class="eyebrow">Exploitation</div><h3>Metasploit</h3><p>Validating vulnerabilities in lab targets.</p></div>
+					<div class="tool"><div class="eyebrow">Web</div><h3>SQLMap</h3><p>Detecting SQL injection flaws.</p></div>
+					<div class="tool"><div class="eyebrow">Passwords</div><h3>John the Ripper</h3><p>Testing password and hash strength.</p></div>
+					<div class="tool"><div class="eyebrow">Mobile</div><h3>Frida</h3><p>Dynamic instrumentation and runtime hooking.</p></div>
+					<div class="tool"><div class="eyebrow">Mobile</div><h3>JADX GUI</h3><p>Decompiling Android apps to Java source.</p></div>
+					<div class="tool"><div class="eyebrow">Mobile</div><h3>Apktool</h3><p>Decoding and rebuilding APK resources.</p></div>
+					<div class="tool"><div class="eyebrow">Reversing</div><h3>Ghidra</h3><p>Disassembling and decompiling binaries.</p></div>
+					<div class="tool"><div class="eyebrow">Forensics</div><h3>Autopsy</h3><p>Disk image and digital forensic analysis.</p></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Achievements -->
+		<section class="section" id="achievements" aria-labelledby="achievements-title">
+			<div class="wrap">
+				<div class="section-heading">
+					<div><div class="eyebrow">03 / Achievements</div><h2 id="achievements-title">Wins &amp; <em>certifications.</em></h2></div>
+					<p>Competitions, certifications, and awards along the way.</p>
+				</div>
+				<div class="achievements-grid">
+					<article class="achievement achievement-feature">
+						<div class="achievement-emblem" aria-hidden="true">
+							<svg class="emblem-ring" viewBox="0 0 200 200"><circle cx="100" cy="100" r="92"/><circle cx="100" cy="100" r="78"/></svg>
+							<div class="emblem-core">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+								<span>Finalist</span>
+							</div>
+						</div>
+						<div class="achievement-body">
+							<div class="achievement-top"><span>01 / Competition</span><span>2026</span></div>
+							<h3>CTF TECHFEST 2026 <em>Finalist.</em></h3>
+							<span class="achievement-issuer">TECHFEST 2026 · Capture The Flag</span>
+							<p>Made it through to the final round of the TECHFEST 2026 Capture The Flag competition by solving security challenges against the clock.</p>
+							<dl class="achievement-facts">
+								<div><dt>Event</dt><dd>TECHFEST 2026</dd></div>
+								<div><dt>Format</dt><dd>Capture The Flag</dd></div>
+								<div><dt>Result</dt><dd>Finalist</dd></div>
+							</dl>
+							<a class="cert-button" href="https://drive.google.com/file/d/1JwQcQ_PyEafae-2yK9Dd6CBY6F6GReHk/view?usp=sharing" target="_blank" rel="noreferrer">View certificate <span aria-hidden="true">↗</span></a>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- Experience & organizations -->
+		<section class="section alt" id="experience" aria-labelledby="experience-title">
+			<div class="wrap">
+				<div class="section-heading">
+					<div><div class="eyebrow">04 / Experience</div><h2 id="experience-title">Experience &amp; <em>organizations.</em></h2></div>
+					<p>Where I’ve contributed, led, and learned outside the classroom.</p>
+				</div>
+				<div class="orgs">
+					<article class="org">
+						<div class="org-head">
+							<span class="org-mark"><img src="images/po-binus.png" alt="Persekutuan Oikoumene BINUS University logo" width="48" height="48"></span>
+							<div>
+								<span class="org-tag">Media &amp; Communication</span>
+								<h3>Persekutuan Oikoumene BINUS University</h3>							</div>
+						</div>
+						<ol class="ladder" style="--steps: 3">
+							<li class="step" style="--lvl: 1"><h4>Member</h4></li>
+							<li class="step" style="--lvl: 2"><h4>Activist of Media and Communication</h4></li>
+							<li class="step is-top" style="--lvl: 3"><span class="step-tag">Top role</span><h4>Board Member of Media and Communication</h4></li>
+						</ol>
+						<div class="org-events">
+							<div class="events-head">
+								<span class="org-tag">Committee · Media &amp; Communication · 2025</span>
+								<span class="org-path">5 events</span>
+							</div>
+							<ol class="events">
+								<li class="event">
+									<span class="event-num">01</span>
+									<h4>BINUS Student Expo</h4>
+									<p>Media for PO BINUS’s booth at the Kemanggisan expo, “Loved to Love”, introducing the fellowship to the incoming B29 freshmen.</p>
+								</li>
+								<li class="event">
+									<span class="event-num">02</span>
+									<h4>PMB PO BINUS</h4>
+									<p>Media for PO’s welcome program for new students, helping freshmen find a community as they start university.</p>
+								</li>
+								<li class="event">
+									<span class="event-num">03</span>
+									<h4>Welcoming Party</h4>
+									<p>Media for the night welcoming new members: praise &amp; worship, ice breaking, an entertainment show, and group games.</p>
+								</li>
+								<li class="event">
+									<span class="event-num">04</span>
+									<h4>LDKA PO B29</h4>
+									<p>Media for the basic leadership training that prepares PO’s new B29 activists for organisational work.</p>
+								</li>
+								<li class="event">
+									<span class="event-num">05</span>
+									<h4>Natal PO 2025</h4>
+									<p>Media for PO BINUS’s Christmas worship celebration, held each year to commemorate the birth of Jesus.</p>
+								</li>
+							</ol>
+						</div>
+					</article>
+					<article class="org">
+						<div class="org-head">
+							<span class="org-mark"><img src="images/csc.png" alt="Cyber Security Community logo" width="48" height="48"></span>
+							<div>
+								<span class="org-tag">Media &amp; Publication</span>
+								<h3>Cyber Security Community</h3>							</div>
+						</div>
+						<ol class="ladder" style="--steps: 2">
+							<li class="step" style="--lvl: 1"><h4>Member</h4></li>
+							<li class="step is-top" style="--lvl: 2"><span class="step-tag">Top role</span><h4>Activist of Media and Publication Division</h4></li>
+						</ol>
+						<div class="org-event">
+							<button class="event-photo" type="button" data-gallery="hut-gallery" aria-label="View the HUT CSC 2025 photo">
+								<img src="images/hut-csc-2025.jpg" alt="Members and committee of the Cyber Security Community at the HUT CSC 2025 celebration" width="1800" height="1350" loading="lazy">
+								<span class="event-badge">Committee</span>
+							</button>
+							<div class="event-info">
+								<span class="org-tag">Event · Committee</span>
+								<h4>HUT CSC 2025</h4>
+								<p>Served on the committee for the Cyber Security Community’s anniversary celebration, bringing members together to mark another year of the community.</p>
+								<button class="event-open" type="button" data-gallery="hut-gallery">View full photo <span aria-hidden="true">⤢</span></button>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- Projects -->
+		<section class="section" id="projects" aria-labelledby="projects-title">
+			<div class="wrap">
+				<div class="section-heading">
+					<div><div class="eyebrow">05 / Projects</div><h2 id="projects-title">Projects I’ve <em>worked on.</em></h2></div>
+					<p>From coursework to team projects, the things I’ve had my hands on.</p>
+				</div>
+				<div class="projects-grid">
+					<article class="project project-feature">
+						<div class="feature-copy">
+							<div class="project-top"><span>01 / Backend security · Featured</span><span>2026</span></div>
+							<h3>Diet.AI <em>secure backend.</em></h3>
+							<p>Diet.AI creates meal plans around a user’s health conditions, so it holds sensitive data. I developed its Express microservices with security first: auth, admin, email, and support, each with its own database.</p>
+							<ul class="ledger">
+								<li><span>bcrypt</span>Passwords hashed with 12 rounds</li>
+								<li><span>JWT</span>Access tokens that expire after 15 minutes, with rotating refresh tokens</li>
+								<li><span>SHA-256</span>OTPs and reset tokens stored only as hashes</li>
+								<li><span>429</span>Rate limits for each IP on login, registration, and password reset</li>
+							</ul>
+							<div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">JWT</span><span class="tag">Joi</span></div>
+							<div class="bk-actions">
+								<button class="cert-button" type="button" data-gallery="diet-gallery">View screens <span aria-hidden="true">⧉</span></button>
+							</div>
+						</div>
+						<button class="feature-preview shot-preview diet-preview" type="button" data-gallery="diet-gallery" aria-label="View Diet.AI screens">
+							<div class="shot-stack">
+								<img class="shot is-back-2" src="images/diet-forgot.jpg" alt="" width="1600" height="951" loading="lazy">
+								<img class="shot is-back-1" src="images/diet-staff-login.jpg" alt="" width="1600" height="951" loading="lazy">
+								<img class="shot" src="images/diet-landing.jpg" alt="" width="1600" height="951" loading="lazy">
+							</div>
+							<ul class="diet-services">
+								<li>auth</li><li>admin</li><li>email</li><li>support</li>
+							</ul>
+							<span class="bk-hint">View screens <span aria-hidden="true">→</span></span>
+						</button>
+					</article>
+					<article class="project project-feature is-flipped">
+						<button class="feature-preview shot-preview bk-preview" type="button" data-gallery="bk-gallery" aria-label="View Batara Kuwera screens">
+							<div class="bk-brand"><img class="bk-logo" src="images/batara-kuwera-logo.png" alt="" width="32" height="32"><span>BATARA KUWERA</span></div>
+							<div class="shot-stack bk-stack">
+								<img class="shot is-back-2" src="images/bk-subscription.jpg" alt="" width="1600" height="763" loading="lazy">
+								<img class="shot is-back-1" src="images/bk-experts.jpg" alt="" width="1600" height="763" loading="lazy">
+								<img class="shot" src="images/bk-dashboard.jpg" alt="" width="1600" height="763" loading="lazy">
+							</div>
+							<span class="bk-hint">View screens <span aria-hidden="true">→</span></span>
+						</button>
+						<div class="feature-copy">
+							<div class="project-top"><span>02 / Fintech web app</span><span>2026</span></div>
+							<h3>Batara Kuwera <em>finance tracker.</em></h3>
+							<p>A fintech web app for people who are struggling with money and want to reach a financial target. It reads their financial health and maps the path to financial freedom, with AI coaching and certified experts when they need more help.</p>
+							<ul class="ledger">
+								<li><span>Health</span>A financial health status built from savings, buffer, and debt load</li>
+								<li><span>Metrics</span>Net worth, savings rate, debt ratio, and emergency fund</li>
+								<li><span>FIRE</span>A projection of the age you reach financial freedom</li>
+								<li><span>Support</span>AI Coach chat, plus matched planners on Expert plans</li>
+							</ul>
+							<div class="tags"><span class="tag">Fintech</span><span class="tag">Dashboard</span><span class="tag">AI Coach</span><span class="tag">Subscriptions</span></div>
+							<div class="bk-actions">
+								<button class="cert-button" type="button" data-gallery="bk-gallery">View screens <span aria-hidden="true">⧉</span></button>
+								<a class="cert-button" href="https://batarakuwera.web.id" target="_blank" rel="noreferrer">Visit live site <span aria-hidden="true">↗</span></a>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="wrap contact" id="contact" aria-labelledby="contact-title">
+			<div class="contact-panel">
+				<div class="contact-copy">
+					<div class="eyebrow">Open to internships &amp; collaboration</div>
+					<h2 id="contact-title">Let’s <em>connect.</em></h2>
+					<div class="contact-actions">
+						<a class="button" href="mailto:josephew6@gmail.com"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email <span aria-hidden="true">↗</span></a>
+						<a class="button button-outline" href="https://www.linkedin.com/in/josephelnathanwibowo" target="_blank" rel="noreferrer"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn <span aria-hidden="true">↗</span></a>
+						<a class="button button-outline" href="https://line.me/ti/p/knYdPx7Hbs" target="_blank" rel="noreferrer"><svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>LINE <span aria-hidden="true">↗</span></a>
+						<a class="button button-outline" href="https://github.com/dqqqr" target="_blank" rel="noreferrer"><svg class="button-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub <span aria-hidden="true">↗</span></a>
+					</div>
+				</div>
+
+				<!-- World heatmap: the table rows are the data (data-id is the country's ISO 3166-1 numeric code) -->
+				<figure class="attack-map">
+					<figcaption>
+						<strong>Where web attacks hit users most</strong>
+						<span>Share of users targeted by web-based malware, by country, Apr–Jun 2026. World average: 4.54%</span>
+					</figcaption>
+					<div class="map-frame">
+						<svg class="map-svg" viewBox="0 0 640 290" role="group" aria-label="World map shading the twenty countries where users faced the greatest risk of web-based malware"></svg>
+						<div class="map-tooltip" hidden></div>
+						<p class="map-status">Loading map…</p>
+					</div>
+					<!-- data-min is the lowest share that earns each shade -->
+					<ul class="map-legend" aria-label="Share of users attacked">
+						<li data-min="0"><i class="level-1"></i>Under 6%</li>
+						<li data-min="6"><i class="level-2"></i>6–7%</li>
+						<li data-min="7"><i class="level-3"></i>7–8%</li>
+						<li data-min="8"><i class="level-4"></i>Over 8%</li>
+						<li><i class="level-0"></i>Not in top 20</li>
+					</ul>
+					<details class="map-data">
+						<summary>View as table</summary>
+						<table>
+							<thead><tr><th>Rank</th><th>Country</th><th>Users attacked</th></tr></thead>
+							<tbody>
+								<tr data-id="050"><td>1</td><td>Bangladesh</td><td>11.71%</td></tr>
+								<tr data-id="356"><td>2</td><td>India</td><td>7.40%</td></tr>
+								<tr data-id="762"><td>3</td><td>Tajikistan</td><td>7.13%</td></tr>
+								<tr data-id="862"><td>4</td><td>Venezuela</td><td>7.05%</td></tr>
+								<tr data-id="554"><td>5</td><td>New Zealand</td><td>6.58%</td></tr>
+								<tr data-id="704"><td>6</td><td>Vietnam</td><td>6.34%</td></tr>
+								<tr data-id="158"><td>7</td><td>Taiwan</td><td>6.28%</td></tr>
+								<tr data-id="056"><td>8</td><td>Belgium</td><td>6.24%</td></tr>
+								<tr data-id="250"><td>9</td><td>France</td><td>5.97%</td></tr>
+								<tr data-id="348"><td>10</td><td>Hungary</td><td>5.92%</td></tr>
+								<tr data-id="524"><td>11</td><td>Nepal</td><td>5.91%</td></tr>
+								<tr data-id="620"><td>12</td><td>Portugal</td><td>5.86%</td></tr>
+								<tr data-id="380"><td>13</td><td>Italy</td><td>5.77%</td></tr>
+								<tr data-id="188"><td>14</td><td>Costa Rica</td><td>5.72%</td></tr>
+								<tr data-id="124"><td>15</td><td>Canada</td><td>5.65%</td></tr>
+								<tr data-id="634"><td>16</td><td>Qatar</td><td>5.61%</td></tr>
+								<tr data-id="214"><td>17</td><td>Dominican Republic</td><td>5.52%</td></tr>
+								<tr data-id="275"><td>18</td><td>Palestine</td><td>5.48%</td></tr>
+								<tr data-id="300"><td>19</td><td>Greece</td><td>5.47%</td></tr>
+								<tr data-id="784"><td>20</td><td>United Arab Emirates</td><td>5.43%</td></tr>
+							</tbody>
+						</table>
+					</details>
+					<p class="map-source">Source: <a href="https://securelist.com/malware-report-q2-2026-pc-iot-statistics/120960/" target="_blank" rel="noreferrer">Kaspersky Securelist, Desktop and IoT threat statistics for Q2 2026</a>. Figures cover users of Kaspersky products. Only the top 20 are published, so other countries are unranked, not attack free.</p>
+				</figure>
+			</div>
+		</section>
+	</main>
+
+	<!-- HUT CSC 2025 photo viewer -->
+	<dialog class="gallery is-single" id="hut-gallery" aria-labelledby="hut-gallery-title">
+		<div class="gallery-head">
+			<strong id="hut-gallery-title"><img src="images/csc.png" alt="" width="34" height="34">HUT CSC 2025</strong>
+			<button class="gallery-close" type="button" aria-label="Close" data-close>×</button>
+		</div>
+		<div class="gallery-tabs" role="tablist">
+			<button class="gallery-tab" type="button" role="tab" aria-selected="true" data-src="images/hut-csc-2025.jpg" data-alt="Members and committee of the Cyber Security Community at the HUT CSC 2025 celebration" data-caption="Members and committee of the Cyber Security Community at the HUT CSC 2025 anniversary celebration.">Photo</button>
+		</div>
+		<div class="gallery-stage">
+			<img src="images/hut-csc-2025.jpg" alt="Members and committee of the Cyber Security Community at the HUT CSC 2025 celebration" width="1800" height="1350">
+		</div>
+		<p class="gallery-caption">Members and committee of the Cyber Security Community at the HUT CSC 2025 anniversary celebration.</p>
+	</dialog>
+
+	<!-- Diet.AI screen viewer -->
+	<dialog class="gallery" id="diet-gallery" aria-labelledby="diet-gallery-title">
+		<div class="gallery-head">
+			<strong id="diet-gallery-title"><span class="diet-mark" aria-hidden="true">D</span>Diet.AI</strong>
+			<button class="gallery-close" type="button" aria-label="Close" data-close>×</button>
+		</div>
+		<div class="gallery-tabs" role="tablist">
+			<button class="gallery-tab" type="button" role="tab" aria-selected="true" data-src="images/diet-landing.jpg" data-caption="Landing: AI meal plans built around a user’s health conditions, and a promise to keep their health data private.">Landing</button>
+			<button class="gallery-tab" type="button" role="tab" aria-selected="false" data-src="images/diet-staff-login.jpg" data-caption="Staff portal: a separate login for staff, guarding user lookup, password resets, audit logs, and staff management.">Staff portal</button>
+			<button class="gallery-tab" type="button" role="tab" aria-selected="false" data-src="images/diet-forgot.jpg" data-caption="Forgot password: sends a reset link that works only once and expires in 30 minutes, and replies the same way whether or not the account exists.">Forgot password</button>
+			<button class="gallery-tab" type="button" role="tab" aria-selected="false" data-src="images/diet-reset.jpg" data-caption="Reset password: checks the reset token before a new password can be set.">Reset password</button>
+		</div>
+		<div class="gallery-stage">
+			<img src="images/diet-landing.jpg" alt="Diet.AI Landing screen" width="1600" height="951">
+			<button class="gallery-nav is-prev" type="button" aria-label="Previous screen" data-step="-1">←</button>
+			<button class="gallery-nav is-next" type="button" aria-label="Next screen" data-step="1">→</button>
+		</div>
+		<p class="gallery-caption">Landing: AI meal plans built around a user’s health conditions, and a promise to keep their health data private.</p>
+	</dialog>
+
+	<!-- Batara Kuwera screen viewer -->
+	<dialog class="gallery" id="bk-gallery" aria-labelledby="bk-gallery-title">
+		<div class="gallery-head">
+			<strong id="bk-gallery-title"><img class="bk-logo" src="images/batara-kuwera-logo.png" alt="" width="26" height="26">Batara Kuwera</strong>
+			<button class="gallery-close" type="button" aria-label="Close" data-close>×</button>
+		</div>
+		<div class="gallery-tabs" role="tablist">
+			<button class="gallery-tab" type="button" role="tab" aria-selected="true" data-src="images/bk-dashboard.jpg" data-caption="Dashboard: a financial health status, four key metrics, income allocation, and a FIRE trajectory that projects when you reach financial freedom.">Dashboard</button>
+			<button class="gallery-tab" type="button" role="tab" aria-selected="false" data-src="images/bk-experts.jpg" data-caption="Experts: certified planners and advisors, matched to what you need help with, from budgeting and debt payoff to retirement and tax planning.">Experts</button>
+			<button class="gallery-tab" type="button" role="tab" aria-selected="false" data-src="images/bk-subscription.jpg" data-caption="Subscription: a free AI Assistant plan, and Expert Standard and Expert Pro plans that add private sessions with an expert and wider advisory.">Subscription</button>
+		</div>
+		<div class="gallery-stage">
+			<img src="images/bk-dashboard.jpg" alt="Batara Kuwera Dashboard screen" width="1600" height="763">
+			<button class="gallery-nav is-prev" type="button" aria-label="Previous screen" data-step="-1">←</button>
+			<button class="gallery-nav is-next" type="button" aria-label="Next screen" data-step="1">→</button>
+		</div>
+		<p class="gallery-caption">Dashboard: a financial health status, four key metrics, income allocation, and a FIRE trajectory that projects when you reach financial freedom.</p>
+	</dialog>
+
+	<footer><div class="wrap footer-inner"><span>© <span id="year">2026</span> Joseph Elnathan Wibowo. Cyber Security Portfolio.</span><div class="socials"><a href="https://www.linkedin.com/in/josephelnathanwibowo" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/dqqqr" target="_blank" rel="noreferrer">GitHub ↗</a></div><a href="#home" class="eyebrow" style="text-decoration:none">Back to top ↑</a></div></footer>
+	<script>
+		const menuButton = document.querySelector('.menu-toggle');
+		const navigation = document.querySelector('#site-nav');
+
+		menuButton.addEventListener('click', () => {
+			const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+			menuButton.setAttribute('aria-expanded', String(!isOpen));
+			menuButton.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
+			navigation.classList.toggle('is-open', !isOpen);
+		});
+
+		navigation.addEventListener('click', (event) => {
+			if (event.target.closest('a')) {
+				menuButton.setAttribute('aria-expanded', 'false');
+				menuButton.setAttribute('aria-label', 'Open navigation');
+				navigation.classList.remove('is-open');
+			}
+		});
+
+		document.querySelector('#year').textContent = new Date().getFullYear();
+
+		const progress = document.querySelector('.scroll-progress');
+		const updateProgress = () => {
+			const max = document.documentElement.scrollHeight - window.innerHeight;
+			progress.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+		};
+
+		window.addEventListener('scroll', updateProgress, { passive: true });
+		window.addEventListener('resize', updateProgress);
+		updateProgress();
+
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		// Dynamic background: drifting nodes that link to each other and to the cursor
+		const backdrop = document.querySelector('.backdrop');
+		const context = backdrop.getContext('2d');
+		const pointer = { x: null, y: null };
+		const linkDistance = 160;
+		const pointerDistance = 190;
+		let particles = [];
+		let width = 0;
+		let height = 0;
+		let lastFrame = 0;
+
+		const drawLink = (fromX, fromY, toX, toY, alpha) => {
+			context.strokeStyle = `rgba(237, 61, 66, ${alpha})`;
+			context.beginPath();
+			context.moveTo(fromX, fromY);
+			context.lineTo(toX, toY);
+			context.stroke();
+		};
+
+		const drawBackdrop = (elapsed) => {
+			context.clearRect(0, 0, width, height);
+
+			particles.forEach((particle, index) => {
+				particle.x += particle.vx * elapsed;
+				particle.y += particle.vy * elapsed;
+				if (particle.x < 0) { particle.x = 0; particle.vx = Math.abs(particle.vx); }
+				if (particle.x > width) { particle.x = width; particle.vx = -Math.abs(particle.vx); }
+				if (particle.y < 0) { particle.y = 0; particle.vy = Math.abs(particle.vy); }
+				if (particle.y > height) { particle.y = height; particle.vy = -Math.abs(particle.vy); }
+
+				for (let next = index + 1; next < particles.length; next++) {
+					const other = particles[next];
+					const distance = Math.hypot(particle.x - other.x, particle.y - other.y);
+					if (distance < linkDistance) drawLink(particle.x, particle.y, other.x, other.y, (1 - distance / linkDistance) * .32);
+				}
+
+				if (pointer.x !== null) {
+					const distance = Math.hypot(particle.x - pointer.x, particle.y - pointer.y);
+					if (distance < pointerDistance) drawLink(particle.x, particle.y, pointer.x, pointer.y, (1 - distance / pointerDistance) * .5);
+				}
+
+				context.fillStyle = 'rgba(244, 241, 239, .45)';
+				context.beginPath();
+				context.arc(particle.x, particle.y, 1.4, 0, Math.PI * 2);
+				context.fill();
+			});
+		};
+
+		const resizeBackdrop = () => {
+			const ratio = Math.min(window.devicePixelRatio || 1, 2);
+			width = window.innerWidth;
+			height = window.innerHeight;
+			backdrop.width = width * ratio;
+			backdrop.height = height * ratio;
+			context.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+			const count = Math.min(110, Math.round(width * height / 12000));
+			particles.length = Math.min(particles.length, count);
+			while (particles.length < count) {
+				particles.push({ x: Math.random() * width, y: Math.random() * height, vx: (Math.random() - .5) * 28, vy: (Math.random() - .5) * 28 });
+			}
+			if (reduceMotion) drawBackdrop(0);
+		};
+
+		const animateBackdrop = (now) => {
+			drawBackdrop(Math.min((now - lastFrame) / 1000, .05));
+			lastFrame = now;
+			requestAnimationFrame(animateBackdrop);
+		};
+
+		window.addEventListener('resize', resizeBackdrop);
+		resizeBackdrop();
+
+		// World heatmap: shades each country listed in the data table by its share
+		const mapFigure = document.querySelector('.attack-map');
+		const mapSvg = mapFigure.querySelector('.map-svg');
+		const mapFrame = mapFigure.querySelector('.map-frame');
+		const mapTooltip = mapFigure.querySelector('.map-tooltip');
+		const mapStatus = mapFigure.querySelector('.map-status');
+		const svgNamespace = 'http://www.w3.org/2000/svg';
+		const mapWidth = 640;
+		const levelFloors = [...mapFigure.querySelectorAll('.map-legend [data-min]')].map((item) => parseFloat(item.dataset.min));
+		const ranked = new Map([...mapFigure.querySelectorAll('tbody tr')].map((row) => {
+			const value = parseFloat(row.cells[2].textContent);
+			return [row.dataset.id, {
+				rank: row.cells[0].textContent,
+				name: row.cells[1].textContent,
+				share: row.cells[2].textContent,
+				value,
+				level: Math.max(1, levelFloors.filter((floor) => value >= floor).length),
+			}];
+		}));
+		const rankedValues = [...ranked.values()].map((entry) => entry.value);
+		const lowestValue = Math.min(...rankedValues);
+		const valueSpread = Math.max(...rankedValues) - lowestValue || 1;
+
+		const showMapTooltip = (entry, x, y) => {
+			const value = document.createElement('strong');
+			const label = document.createElement('span');
+			value.textContent = entry.share;
+			label.textContent = `${entry.name} · rank ${entry.rank}`;
+			mapTooltip.replaceChildren(value, label);
+			mapTooltip.hidden = false;
+
+			const half = mapTooltip.offsetWidth / 2;
+			mapTooltip.classList.toggle('is-below', y < mapTooltip.offsetHeight + 16);
+			mapTooltip.style.left = `${Math.min(Math.max(x, half), mapFrame.clientWidth - half)}px`;
+			mapTooltip.style.top = `${y}px`;
+		};
+
+		// Shows the tooltip at a country's centre, given in map units
+		const showMapTooltipAt = (entry, [x, y]) => {
+			const scale = mapSvg.clientWidth / mapWidth;
+			showMapTooltip(entry, x * scale, y * scale);
+		};
+
+		const bindMapMark = (mark, entry, centre) => {
+			mark.setAttribute('tabindex', '0');
+			mark.setAttribute('role', 'img');
+			mark.setAttribute('aria-label', `${entry.name}: ${entry.share}, rank ${entry.rank}`);
+			mark.addEventListener('pointermove', (event) => {
+				const frame = mapFrame.getBoundingClientRect();
+				showMapTooltip(entry, event.clientX - frame.left, event.clientY - frame.top);
+			});
+			mark.addEventListener('focus', () => showMapTooltipAt(entry, centre));
+			mark.addEventListener('pointerleave', () => { mapTooltip.hidden = true; });
+			mark.addEventListener('blur', () => { mapTooltip.hidden = true; });
+		};
+
+		// Map motion: countries light up in rank order, ping, then take turns in the spotlight
+		const animateMap = (marks) => {
+			let started = false;
+			let visible = false;
+			let paused = false;
+			let current = -1;
+
+			const clearSpotlight = () => {
+				marks[current]?.mark.classList.remove('is-spotlight');
+				mapTooltip.classList.remove('is-auto');
+			};
+
+			const spotlight = () => {
+				if (paused || !visible || document.hidden) return;
+				clearSpotlight();
+				current = (current + 1) % marks.length;
+				marks[current].mark.classList.add('is-spotlight');
+				mapTooltip.classList.add('is-auto');
+				showMapTooltipAt(marks[current].entry, marks[current].centre);
+			};
+
+			const pause = () => {
+				paused = true;
+				clearSpotlight();
+				mapTooltip.hidden = true;
+			};
+
+			mapFrame.addEventListener('pointerenter', pause);
+			mapFrame.addEventListener('focusin', pause);
+			mapFrame.addEventListener('pointerleave', () => { paused = false; });
+			mapFrame.addEventListener('focusout', () => { paused = false; });
+
+			new IntersectionObserver(([entry]) => {
+				visible = entry.isIntersecting;
+				if (!visible || started) return;
+				started = true;
+				marks.forEach(({ fills }, index) => {
+					setTimeout(() => fills.forEach((fill) => fill.classList.remove('is-pending')), index * 110);
+				});
+				setTimeout(() => {
+					mapSvg.classList.add('is-live');
+					spotlight();
+					setInterval(spotlight, 2600);
+				}, marks.length * 110 + 500);
+			}, { threshold: .4 }).observe(mapFrame);
+		};
+
+		(async () => {
+			try {
+				const [{ geoNaturalEarth1, geoPath }, { feature }, world] = await Promise.all([
+					import('https://cdn.jsdelivr.net/npm/d3-geo@3/+esm'),
+					import('https://cdn.jsdelivr.net/npm/topojson-client@3/+esm'),
+					fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then((response) => response.json()),
+				]);
+
+				// Antarctica (010) is dropped so the inhabited world fills the frame; ranked countries draw last
+				const countries = feature(world, world.objects.countries);
+				countries.features = countries.features
+					.filter((country) => country.id !== '010')
+					.sort((a, b) => ranked.has(a.id) - ranked.has(b.id));
+
+				const path = geoPath(geoNaturalEarth1().fitWidth(mapWidth, countries));
+				mapSvg.setAttribute('viewBox', `0 0 ${mapWidth} ${Math.ceil(path.bounds(countries)[1][1])}`);
+
+				const marks = new Map();
+				const pulses = [];
+				const markers = [];
+				countries.features.forEach((country) => {
+					const entry = ranked.get(country.id);
+					const shape = document.createElementNS(svgNamespace, 'path');
+					shape.setAttribute('d', path(country));
+					mapSvg.append(shape);
+					if (!entry) return;
+					shape.classList.add(`level-${entry.level}`);
+
+					// Each ranked country gets a ping ring that grows with its share
+					// The centre comes from the largest landmass, so overseas territories don't drag it out to sea
+					const landmasses = country.geometry.type === 'MultiPolygon'
+						? country.geometry.coordinates.map((coordinates) => ({ type: 'Polygon', coordinates }))
+						: [country];
+					const centre = path.centroid(landmasses.reduce((largest, landmass) => (path.area(landmass) > path.area(largest) ? landmass : largest)));
+					const pulse = document.createElementNS(svgNamespace, 'circle');
+					pulse.setAttribute('class', 'pulse');
+					pulse.setAttribute('cx', centre[0]);
+					pulse.setAttribute('cy', centre[1]);
+					pulse.setAttribute('r', 7 + 12 * (entry.value - lowestValue) / valueSpread);
+					pulses.push(pulse);
+
+					// Countries too small to see get a dot with a larger hover area
+					let mark = shape;
+					const fills = [shape];
+					if (path.area(country) < 40) {
+						mark = document.createElementNS(svgNamespace, 'g');
+						mark.innerHTML = `<circle class="hit" cx="${centre[0]}" cy="${centre[1]}" r="12"/><circle class="marker level-${entry.level}" cx="${centre[0]}" cy="${centre[1]}" r="4.5"/>`;
+						fills.push(mark.lastElementChild);
+						markers.push(mark);
+					}
+					bindMapMark(mark, entry, centre);
+					marks.set(country.id, { entry, mark, fills, centre, pulse });
+				});
+				mapSvg.append(...pulses, ...markers);
+				mapStatus.remove();
+
+				if (!reduceMotion) {
+					// Follow the table's rank order, not the order the shapes were drawn in
+					const ordered = [...ranked.keys()].map((id) => marks.get(id)).filter(Boolean);
+					ordered.forEach(({ fills, pulse }, index) => {
+						fills.forEach((fill) => fill.classList.add('is-pending'));
+						pulse.style.setProperty('--pulse-delay', `${index * .25}s`);
+					});
+					animateMap(ordered);
+				}
+			} catch {
+				mapStatus.textContent = 'The map needs an internet connection. The figures are in the table below.';
+			}
+		})();
+
+		// Motion extras are skipped for visitors who prefer reduced motion
+		if (!reduceMotion) {
+			requestAnimationFrame(animateBackdrop);
+			window.addEventListener('pointermove', (event) => {
+				if (event.pointerType !== 'mouse') return;
+				pointer.x = event.clientX;
+				pointer.y = event.clientY;
+			});
+			document.documentElement.addEventListener('pointerleave', () => { pointer.x = pointer.y = null; });
+
+			// Scrolling ticker: repeat the group until it can loop without a gap
+			const track = document.querySelector('.ticker-track');
+			const group = track.firstElementChild;
+			const copies = Math.ceil(Math.max(window.innerWidth, screen.width) / Math.max(group.offsetWidth, 200)) + 1;
+
+			for (let i = 1; i < copies; i++) {
+				const clone = group.cloneNode(true);
+				clone.setAttribute('aria-hidden', 'true');
+				track.append(clone);
+			}
+			track.style.setProperty('--ticker-shift', `${-100 / copies}%`);
+			track.classList.add('is-running');
+
+			// Fade sections in as they scroll into view
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+
+			document.querySelectorAll('.section-heading, .skill-group, .tools-grid, .achievement, .org, .project, .contact-panel').forEach((element) => {
+				const index = [...element.parentElement.children].indexOf(element);
+				element.style.setProperty('--reveal-delay', `${(index % 4) * 80}ms`);
+				element.classList.add('reveal');
+				observer.observe(element);
+			});
+
+			// Type the terminal commands out one line at a time
+			const terminal = document.querySelector('.terminal-body');
+			const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+			(async () => {
+				const lines = terminal.innerHTML.split('\n');
+				terminal.style.minHeight = `${terminal.offsetHeight}px`;
+				terminal.innerHTML = '';
+				await sleep(700);
+
+				for (const line of lines) {
+					const command = line.match(/<span class="cmd">(.*)<\/span>/);
+					const row = document.createElement('span');
+					if (terminal.childNodes.length) terminal.append('\n');
+					terminal.append(row);
+
+					if (command) {
+						row.innerHTML = '<b>$</b> <span class="cmd is-typing"></span>';
+						const target = row.querySelector('.cmd');
+						for (const character of command[1]) {
+							target.textContent += character;
+							await sleep(60);
+						}
+						await sleep(260);
+						target.classList.remove('is-typing');
+					} else {
+						row.innerHTML = line;
+						await sleep(130);
+					}
+				}
+			})();
+		}
+	</script>
+	<script>
+		// Opens each project's screen viewer and steps through its tabs
+		(() => {
+			document.querySelectorAll('dialog.gallery').forEach((dialog) => {
+				if (typeof dialog.showModal !== 'function') return;
+				const name = dialog.querySelector('.gallery-head strong').textContent.trim();
+				const tabs = [...dialog.querySelectorAll('.gallery-tab')];
+				const image = dialog.querySelector('.gallery-stage img');
+				const caption = dialog.querySelector('.gallery-caption');
+				let current = 0;
+
+				const show = (index) => {
+					current = (index + tabs.length) % tabs.length;
+					tabs.forEach((tab, i) => tab.setAttribute('aria-selected', String(i === current)));
+					const tab = tabs[current];
+					image.src = tab.dataset.src;
+					image.alt = tab.dataset.alt || `${name} ${tab.textContent} screen`;
+					caption.textContent = tab.dataset.caption;
+					image.classList.remove('is-swapping');
+					void image.offsetWidth;
+					image.classList.add('is-swapping');
+				};
+
+				document.querySelectorAll(`[data-gallery="${dialog.id}"]`).forEach((trigger) => {
+					trigger.addEventListener('click', () => { show(0); dialog.showModal(); });
+				});
+				tabs.forEach((tab, i) => tab.addEventListener('click', () => show(i)));
+				dialog.querySelectorAll('[data-step]').forEach((button) => {
+					button.addEventListener('click', () => show(current + Number(button.dataset.step)));
+				});
+				dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+				dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+				dialog.addEventListener('keydown', (event) => {
+					if (event.key === 'ArrowRight') show(current + 1);
+					if (event.key === 'ArrowLeft') show(current - 1);
+				});
+			});
+
+			// Use the app logo once images/batara-kuwera-logo.png is added, otherwise the site icon
+			document.querySelectorAll('.bk-logo').forEach((logo) => {
+				logo.addEventListener('error', () => { logo.src = 'images/batara-kuwera.png'; }, { once: true });
+				if (logo.complete && logo.naturalWidth === 0) logo.src = 'images/batara-kuwera.png';
+			});
+		})();
+	</script>
+</body>
+</html>
